@@ -1,1 +1,1 @@
-# -FavoriteLiterature.DevOps
+# FavoriteLiterature.DevOps

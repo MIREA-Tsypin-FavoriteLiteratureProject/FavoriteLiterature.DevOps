@@ -1,0 +1,31 @@
+services:
+  favlit-works-api:
+    container_name: favlit_works_api
+    image: works-api-image
+    healthcheck:
+      interval: 10s
+      retries: 6
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8080/api/health
+      timeout: 10s
+    depends_on:
+      favlit-works-db:
+        condition: service_healthy
+
+  favlit-works-db:
+    container_name: favlit_works_db
+    image: postgres:15.2-alpine
+    environment:
+      POSTGRES_DB: "fav_lit_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "7000:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
