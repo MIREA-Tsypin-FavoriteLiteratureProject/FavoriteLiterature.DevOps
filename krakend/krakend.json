@@ -1,101 +1,390 @@
 {
   "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
-  "name": "KrakenD FavoriteLiterature Enterprise API Gateway",
-  "port": 8080,
-  "host": [
-    "http://localhost:8080"
-  ],
+  "name": "KrakenD - API Gateway",
   "timeout": "3000ms",
   "cache_ttl": "300s",
-  "disable_rest": true,
+  "output_encoding": "json",
   "endpoints": [
     {
       "endpoint": "/api/genres",
       "method": "GET",
-      "@comment": "Feature: FavoriteLiterature.Works GET all Genres endpoint",
-      "output_encoding": "no-op",
-      "encoding": "no-op",
+      "output_encoding": "json",
       "backend": [
         {
+          "url_pattern": "/api/genres",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
           "host": [
-            "http://favlit-works-api:80"
+            "host.docker.internal:15000"
           ],
-          "method": "POST",
-          "output_encoding": "no-op",
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_query_strings": [
+        "?Skip=value&Take=value"
+      ]
+    },
+    {
+      "endpoint": "/api/genres/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/genres/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_headers": [
+        "Authorization"
+      ]
+    },
+    {
+      "endpoint": "/api/genres",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "Authorization"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/api/genres",
           "encoding": "no-op",
-          "url_pattern": "api/genres"
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
         }
       ]
     },
     {
-      "endpoint": "api/genres",
-      "method": "POST",
-      "@comment": "Feature: FavoriteLiterature.Works Genre POST endpoint",
+      "endpoint": "/api/genres/{id}",
+      "method": "PUT",
       "output_encoding": "no-op",
-      "encoding": "no-op",
       "backend": [
         {
-          "host": [
-            "http://favlit-works-api:80"
-          ],
-          "method": "POST",
-          "output_encoding": "no-op",
+          "url_pattern": "/api/genres/{id}",
           "encoding": "no-op",
-          "url_pattern": "api/genres"
+          "sd": "static",
+          "method": "PUT",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
         }
+      ],
+      "input_headers": [
+        "Authorization"
+      ]
+    },
+    {
+      "endpoint": "/api/genres/{id}",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/genres/{id}",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "DELETE",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/attachments/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/attachments/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/attachments",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/attachments",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_query_strings": [
+        "?Skip=value&Take=value"
+      ]
+    },
+    {
+      "endpoint": "/api/authors",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/authors",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_query_strings": [
+        "?Skip=value&Take=value"
+      ]
+    },
+    {
+      "endpoint": "/api/authors",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/authors",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/authors/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/authors/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/authors/{id}",
+      "method": "PUT",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/authors/{id}",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "PUT",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/works",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/works",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_query_strings": [
+        "?Skip=value&Take=value"
+      ]
+    },
+    {
+      "endpoint": "/api/works/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/works/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/works/{id}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/works/{id}",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "PATCH",
+          "host": [
+            "host.docker.internal:15000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/registration",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/users/registration",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "host.docker.internal:14000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/authentication",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/users/authentication",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "host.docker.internal:14000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/current",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users/current",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:14000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_headers": [
+        "Authorization"
+      ]
+    },
+    {
+      "endpoint": "/api/users/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:14000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_headers": [
+        "Authorization"
+      ]
+    },
+    {
+      "endpoint": "/api/users",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:14000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_query_strings": [
+        "?Skip=value&Take=value"
+      ],
+      "input_headers": [
+        "Authorization"
+      ]
+    },
+    {
+      "endpoint": "/api/drafts",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/drafts",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:16000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "input_headers": [
+        "Authorization"
       ]
     }
   ],
-  "sequential_start": true,
-  "extra_config": {
-    "telemetry/metrics": {
-      "collection_time": "30s",
-      "listen_address": "localhost:8090"
-    },
-    "telemetry/influx": {
-      "address": "http://influxdb:8086",
-      "ttl": "25s",
-      "buffer_size": 100,
-      "username": "krakend-dev",
-      "password": "pas5w0rd"
-    },
-    "telemetry/opencensus": {
-      "sample_rate": 100,
-      "reporting_period": 0,
-      "enabled_layers": {
-        "backend": true,
-        "router": true
-      },
-      "exporters": {
-        "prometheus": {
-          "port": 9091,
-          "namespace": "krakend",
-          "tag_host": false,
-          "tag_path": true,
-          "tag_method": true,
-          "tag_statuscode": false
-        },
-        "jaeger": {
-          "endpoint": "http://jaeger:14268/api/traces",
-          "service_name": "krakend"
-        }
-      }
-    },
-    "security/cors": {
-      "allow_origins": ["*"],
-      "allow_methods": ["POST", "GET"],
-      "allow_headers": ["Origin", "Authorization", "Content-Type"],
-      "expose_headers": ["Content-Length"],
-      "max_age": "12h"
-    },
-    "auth/revoker": {
-      "N": 10000000,
-      "P": 0.0000001,
-      "hash_name": "optimal",
-      "TTL": 1500,
-      "port": 1234,
-      "token_keys": ["jti"]
-    }
+  "plugin": {
+    "pattern": ".so",
+    "folder": "/opt/krakend/plugins/"
   }
 }
